@@ -5,6 +5,8 @@ from rest_framework.routers import DefaultRouter
 from details.views import CourseViewSet, LessonCreateAPIView, LessonListAPIView, LessonRetrieveAPIView, \
     LessonUpdateAPIView, LessonDestroyAPIView, CourseCreateAPIView
 from details.views import CourseDestroyAPIView, CourseUpdateAPIView, CourseRetrieveAPIView
+from django.urls import path
+
 
 app_name = DetailsConfig.name
 
@@ -29,4 +31,5 @@ urlpatterns = [
                   path(
                       "course/delete/<int:pk>/", CourseDestroyAPIView.as_view(), name="course-delete"
                   ),
+
               ] + router.urls
