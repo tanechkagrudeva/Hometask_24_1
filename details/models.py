@@ -20,6 +20,7 @@ class Course(models.Model):
 
 
 class Lesson(models.Model):
+    objects = None
     title = models.CharField(max_length=100, verbose_name="название")
     description = models.TextField(verbose_name="описание", **NULLABLE)
     preview = models.ImageField(verbose_name="обложка", **NULLABLE)
