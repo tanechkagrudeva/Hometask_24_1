@@ -39,6 +39,16 @@ class CourseTestCase(APITestCase):
         self.assertEqual(response.json()["title"], data["title"])
         self.assertTrue(Course.objects.all().exists())
 
+    def test_list_courses(self):
+        """Test listing courses"""
+        response = self.client.get("/courses/")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_get_course(self):
+        """Test getting a course"""
+        response = self.client.get(f"/courses/{self.course.pk}/")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.json()["title"], self.course.title)
 
     def test_update_course(self):
         """Test updating a course"""
@@ -100,3 +110,7 @@ class CourseTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertFalse(Lesson.objects.all().exists())
 
+    def test_active_subscription(self):
+        response = self.client.get(f"/courses/{self.course.pk}/")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertTrue(response.json()["is_subscribed"])

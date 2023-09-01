@@ -4,7 +4,9 @@ from details.apps import DetailsConfig
 from rest_framework.routers import DefaultRouter
 from details.views import CourseViewSet, LessonCreateAPIView, LessonListAPIView, LessonRetrieveAPIView, \
     LessonUpdateAPIView, LessonDestroyAPIView, CourseCreateAPIView
-from details.views import CourseDestroyAPIView, CourseUpdateAPIView, CourseRetrieveAPIView
+from details.views import CourseDestroyAPIView, CourseUpdateAPIView, CourseRetrieveAPIView, PaymentListAPIView, \
+    PaymentCreateAPIView, PaymentDestroyAPIView, PaymentUpdateAPIView, PaymentRetrieveAPIView
+
 from django.urls import path
 
 
@@ -30,6 +32,19 @@ urlpatterns = [
                   ),
                   path(
                       "course/delete/<int:pk>/", CourseDestroyAPIView.as_view(), name="course-delete"
+                  ),
+                  path("payment/create/", PaymentCreateAPIView.as_view(), name="payment-create"),
+                  path("payment/", PaymentListAPIView.as_view(), name="payment-list"),
+                  path("payment/<int:pk>/", PaymentRetrieveAPIView.as_view(), name="payment-get"),
+                  path(
+                      "payment/update/<int:pk>/",
+                      PaymentUpdateAPIView.as_view(),
+                      name="payment-update",
+                  ),
+                  path(
+                      "payment/delete/<int:pk>/",
+                      PaymentDestroyAPIView.as_view(),
+                      name="payment-delete",
                   ),
 
               ] + router.urls
